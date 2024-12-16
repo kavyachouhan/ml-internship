@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Village Info</title>
+</head>
+<body>
+    <h1>Village Info</h1>
+    <h2>Step 1: Village Details</h2>
+    <p><strong>Name:</strong> {{ village_info.name }}</p>
+    <p><strong>Address:</strong> {{ village_info.address }}</p>
+    <h3>Opening Times:</h3>
+    <ul>
+        {% for time in village_info.opening_times %}
+        <li>{{ time.day }}: {{ time.start }} - {{ time.end }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Original Menu:</h3>
+    <ul>
+        {% for item in village_info.original_menu %}
+        <li>{{ item.item }} - ${{ item.price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Step 2: Nearby Restaurants</h2>
+    {% for rest in nearby_restaurants %}
+    <h3>{{ rest.name }}</h3>
+    <p>{{ rest.address }} (Rating: {{ rest.rating }})</p>
+    <ul>
+        {% for item in rest.menu_items %}
+        <li>{{ item.item }} - ${{ item.price }}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+    <h2>Step 3: Lowest Local Prices by Item</h2>
+    <ul>
+        {% for key, value in lowest_local_prices_by_item.items %}
+        <li>{{ key }} - ${{ value }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Step 4: Busy Factor</h2>
+    <p>{{ busy_factor }}% busier than usual</p>
+
+    <h2>Step 5: Weather</h2>
+    <p>Temperature: {{ weather.temperature_f }} °F</p>
+    <p>Conditions: {{ weather.weather_description }}</p>
+
+    <h2>Step 6: Adjusted Menu</h2>
+    <ul>
+        {% for item in adjusted_village_menu %}
+        <li>{{ item.item }} - Base: ${{ item.base_price }} | Adjusted: ${{ item.adjusted_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Price Factor Used: {{ price_factor_used }}</h3>
+
+</body>
+</html>
